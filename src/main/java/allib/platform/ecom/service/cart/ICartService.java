@@ -9,4 +9,6 @@ public interface ICartService {
 
     Cart addProduct(Long cartId, ProductRequestDto productRequest);
 
+    Cart removeProduct(Long cartId, Long productId);
+
 }

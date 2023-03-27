@@ -24,4 +24,9 @@ public class CartController implements ICartController {
         return new ResponseEntity<Cart>(cartService.addProduct(cartId, productRequest), HttpStatus.CREATED);
     }
 
+    @Override
+    public ResponseEntity<Cart> removeProduct(Long cartId, Long productId) {
+        return new ResponseEntity<Cart>(cartService.removeProduct(cartId, productId), HttpStatus.OK);
+    }
+
 }

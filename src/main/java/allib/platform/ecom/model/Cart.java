@@ -38,4 +38,8 @@ public class Cart {
         products.add(cartProduct);
     }
 
+    public void removeProduct(Product product) {
+        products.removeIf(cartProduct -> cartProduct.getCart().equals(this) && cartProduct.getProduct().equals(product));
+    }
+
 }

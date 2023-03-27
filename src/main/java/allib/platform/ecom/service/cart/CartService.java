@@ -33,4 +33,13 @@ public class CartService implements ICartService {
         return cartRepository.save(cart);
     }
 
+    @Override
+    public Cart removeProduct(Long cartId, Long productId) {
+        Cart cart = cartRepository.findById(cartId).orElseThrow();
+        Product product = productRepository.findById(productId).orElseThrow();
+        cart.removeProduct(product);
+        // Cart might be deleted when the user removed the last product
+        return cartRepository.save(cart);
+    }
+
 }
