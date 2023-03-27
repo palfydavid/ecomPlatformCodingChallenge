@@ -33,7 +33,10 @@ public class CartController implements ICartController {
     // Add customer
 
     // Remove customer
-
+    @Override
+    public ResponseEntity<Cart> removeCustomer(Long cartId) {
+        return new ResponseEntity<Cart>(cartService.removeCustomer(cartId), HttpStatus.OK);
+    }
 
     @Override
     public ResponseEntity<Cart> changeCheckoutState(Long cartId, CheckoutStateRequestDto checkoutStateRequest) {

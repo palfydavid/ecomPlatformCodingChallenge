@@ -13,8 +13,10 @@ public interface ICartService {
     Cart removeProduct(Long cartId, Long productId);
 
     // Add customer
+//    Cart addCustomer(Long cartId, CustomerRequestDto customerRequest);
 
     // Remove customer
+    Cart removeCustomer(Long cartId);
 
     Cart changeCheckoutState(Long cartId, CheckoutStateRequestDto checkoutStateRequest);
 

@@ -46,6 +46,12 @@ public class CartService implements ICartService {
     // Add customer
 
     // Remove customers
+    @Override
+    public Cart removeCustomer(Long cartId) {
+        Cart cart = cartRepository.findById(cartId).orElseThrow();
+        cart.setCustomer(null);
+        return cartRepository.save(cart);
+    }
 
     @Override
     public Cart changeCheckoutState(Long cartId, CheckoutStateRequestDto checkoutStateRequest) {

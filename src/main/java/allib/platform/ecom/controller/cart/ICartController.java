@@ -20,6 +20,8 @@ public interface ICartController {
     // Add customer
 
     // Remove customer
+    @DeleteMapping("/carts/{cartId}/customer")
+    ResponseEntity<Cart> removeCustomer(@PathVariable Long cartId);
 
     @PatchMapping("/carts/{cartId}/checkout")
     ResponseEntity<Cart> changeCheckoutState(@PathVariable Long cartId, @RequestBody CheckoutStateRequestDto checkoutStateRequest);
