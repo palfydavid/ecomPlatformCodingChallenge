@@ -25,4 +25,11 @@ public class CartProduct {
 
     private int quantity;
 
+    public CartProduct(Cart cart, Product product, int quantity) {
+        this.id = new CartProductKey(cart.getId(), product.getId());
+        this.cart = cart;
+        this.product = product;
+        this.quantity = quantity;
+    }
+
 }
