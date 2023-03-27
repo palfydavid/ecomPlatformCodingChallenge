@@ -23,6 +23,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(CartCheckoutStateException.class)
+    @ResponseStatus(code = HttpStatus.CONFLICT)
+    public ResponseEntity<ErrorResponse> handleCartStateException(CartCheckoutStateException ex, WebRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setStatusCode(HttpStatus.CONFLICT.value());
+        errorResponse.setMessage(ex.getMessage());
+        errorResponse.setTimestamp(new Date());
+        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.CONFLICT);
+    }
+
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ErrorResponse> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex, WebRequest request) {
         ErrorResponse errorResponse = new ErrorResponse();

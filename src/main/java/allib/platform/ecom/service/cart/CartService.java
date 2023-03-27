@@ -1,5 +1,6 @@
 package allib.platform.ecom.service.cart;
 
+import allib.platform.ecom.aspect.CheckCartCheckoutState;
 import allib.platform.ecom.dto.CheckoutStateRequestDto;
 import allib.platform.ecom.dto.CustomerRequestDto;
 import allib.platform.ecom.dto.ProductRequestDto;
@@ -38,6 +39,7 @@ public class CartService implements ICartService {
     }
 
     @Override
+    @CheckCartCheckoutState
     public Cart addProduct(Long cartId, ProductRequestDto productRequest) {
         Cart cart = cartRepository.findById(cartId).orElseThrow(
                 () -> new ResourceNotFoundException("Cart not found with the given ID " + cartId + ".")
@@ -50,6 +52,7 @@ public class CartService implements ICartService {
     }
 
     @Override
+    @CheckCartCheckoutState
     public Cart removeProduct(Long cartId, Long productId) {
         Cart cart = cartRepository.findById(cartId).orElseThrow(
                 () -> new ResourceNotFoundException("Cart not found with the given ID " + cartId + ".")
@@ -63,6 +66,7 @@ public class CartService implements ICartService {
     }
 
     @Override
+    @CheckCartCheckoutState
     public Cart addCustomer(Long cartId, CustomerRequestDto customerRequest) {
         Cart cart = cartRepository.findById(cartId).orElseThrow(
                 () -> new ResourceNotFoundException("Cart not found with the given ID: " + cartId + ".")
@@ -82,6 +86,7 @@ public class CartService implements ICartService {
     }
 
     @Override
+    @CheckCartCheckoutState
     public Cart removeCustomer(Long cartId) {
         Cart cart = cartRepository.findById(cartId).orElseThrow(
                 () -> new ResourceNotFoundException("Cart not found with the given ID: " + cartId + ".")
