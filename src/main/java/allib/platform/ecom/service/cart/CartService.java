@@ -25,4 +25,12 @@ public class CartService implements ICartService {
         return cartRepository.save(cart);
     }
 
+    @Override
+    public Cart addProduct(Long cartId, ProductRequestDto productRequest) {
+        Cart cart = cartRepository.findById(cartId).orElseThrow();
+        Product product = productRepository.findById(productRequest.getProductId()).orElseThrow();
+        cart.addProduct(product, productRequest.getQuantity());
+        return cartRepository.save(cart);
+    }
+
 }

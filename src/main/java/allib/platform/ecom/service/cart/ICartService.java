@@ -7,4 +7,6 @@ public interface ICartService {
 
     Cart create(ProductRequestDto productRequest);
 
+    Cart addProduct(Long cartId, ProductRequestDto productRequest);
+
 }

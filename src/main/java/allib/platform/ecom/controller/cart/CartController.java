@@ -18,4 +18,10 @@ public class CartController implements ICartController {
     public ResponseEntity<Cart> create(ProductRequestDto productRequest) {
         return new ResponseEntity<Cart>(cartService.create(productRequest), HttpStatus.CREATED);
     }
+
+    @Override
+    public ResponseEntity<Cart> addProduct(Long cartId, ProductRequestDto productRequest) {
+        return new ResponseEntity<Cart>(cartService.addProduct(cartId, productRequest), HttpStatus.CREATED);
+    }
+
 }
