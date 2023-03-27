@@ -1,5 +1,6 @@
 package allib.platform.ecom.service.cart;
 
+import allib.platform.ecom.dto.CheckoutStateRequestDto;
 import allib.platform.ecom.dto.ProductRequestDto;
 import allib.platform.ecom.model.Cart;
 import allib.platform.ecom.model.Product;
@@ -42,4 +43,14 @@ public class CartService implements ICartService {
         return cartRepository.save(cart);
     }
 
+    // Add customer
+
+    // Remove customers
+
+    @Override
+    public Cart changeCheckoutState(Long cartId, CheckoutStateRequestDto checkoutStateRequest) {
+        Cart cart = cartRepository.findById(cartId).orElseThrow();
+        cart.setReadyToCheckout(checkoutStateRequest.isReadyToCheckout());
+        return cartRepository.save(cart);
+    }
 }
