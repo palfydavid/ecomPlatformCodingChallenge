@@ -1,6 +1,7 @@
 package allib.platform.ecom.controller.cart;
 
 import allib.platform.ecom.dto.CheckoutStateRequestDto;
+import allib.platform.ecom.dto.CustomerRequestDto;
 import allib.platform.ecom.dto.ProductRequestDto;
 import allib.platform.ecom.model.Cart;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,9 @@ public interface ICartController {
     @DeleteMapping("/carts/{cartId}/products/{productId}")
     ResponseEntity<Cart> removeProduct(@PathVariable Long cartId, @PathVariable Long productId);
 
-    // Add customer
+    @PostMapping("/carts/{cartId}/customer")
+    ResponseEntity<Cart> addCustomer(@PathVariable Long cartId, @RequestBody CustomerRequestDto customerRequest);
 
-    // Remove customer
     @DeleteMapping("/carts/{cartId}/customer")
     ResponseEntity<Cart> removeCustomer(@PathVariable Long cartId);
 

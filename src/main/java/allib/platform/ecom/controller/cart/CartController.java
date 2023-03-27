@@ -1,6 +1,7 @@
 package allib.platform.ecom.controller.cart;
 
 import allib.platform.ecom.dto.CheckoutStateRequestDto;
+import allib.platform.ecom.dto.CustomerRequestDto;
 import allib.platform.ecom.dto.ProductRequestDto;
 import allib.platform.ecom.model.Cart;
 import allib.platform.ecom.service.cart.CartService;
@@ -30,9 +31,11 @@ public class CartController implements ICartController {
         return new ResponseEntity<Cart>(cartService.removeProduct(cartId, productId), HttpStatus.OK);
     }
 
-    // Add customer
+    @Override
+    public ResponseEntity<Cart> addCustomer(Long cartId, CustomerRequestDto customerRequest) {
+        return new ResponseEntity<Cart>(cartService.addCustomer(cartId, customerRequest), HttpStatus.CREATED);
+    }
 
-    // Remove customer
     @Override
     public ResponseEntity<Cart> removeCustomer(Long cartId) {
         return new ResponseEntity<Cart>(cartService.removeCustomer(cartId), HttpStatus.OK);

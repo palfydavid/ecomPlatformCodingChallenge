@@ -1,13 +1,18 @@
 package allib.platform.ecom.service.cart;
 
 import allib.platform.ecom.dto.CheckoutStateRequestDto;
+import allib.platform.ecom.dto.CustomerRequestDto;
 import allib.platform.ecom.dto.ProductRequestDto;
 import allib.platform.ecom.model.Cart;
+import allib.platform.ecom.model.Customer;
 import allib.platform.ecom.model.Product;
 import allib.platform.ecom.repository.CartRepository;
+import allib.platform.ecom.repository.CustomerRepository;
 import allib.platform.ecom.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class CartService implements ICartService {
@@ -17,6 +22,9 @@ public class CartService implements ICartService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @Override
     public Cart create(ProductRequestDto productRequest) {
@@ -43,9 +51,23 @@ public class CartService implements ICartService {
         return cartRepository.save(cart);
     }
 
-    // Add customer
+    @Override
+    public Cart addCustomer(Long cartId, CustomerRequestDto customerRequest) {
+        Cart cart = cartRepository.findById(cartId).orElseThrow();
+        Optional<Customer> customer = customerRepository.findByEmail(customerRequest.getEmail());
+        if(customer.isPresent()) {
+            cart.setCustomer(customer.get());
+        } else {
+            Customer newCustomer = new Customer();
+            newCustomer.setFirstName(customerRequest.getFirstName());
+            newCustomer.setLastName(customerRequest.getLastName());
+            newCustomer.setEmail(customerRequest.getEmail());
+            newCustomer = customerRepository.save(newCustomer);
+            cart.setCustomer(newCustomer);
+        }
+        return cartRepository.save(cart);
+    }
 
-    // Remove customers
     @Override
     public Cart removeCustomer(Long cartId) {
         Cart cart = cartRepository.findById(cartId).orElseThrow();
