@@ -34,3 +34,4 @@ DELETE | /carts/{cartId}/customer | Removes a customer from a cart
 PATCH | /carts/{cartId}/checkout | Changes the checkout state of a cart
 
 ## Database schema
+![Database schema](database_schema.png)
