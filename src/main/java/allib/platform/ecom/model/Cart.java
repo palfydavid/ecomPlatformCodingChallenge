@@ -26,7 +26,7 @@ public class Cart {
     private Customer customer;
 
     /*
-        Now I am just ignoring the product list at API responses
+        At this point, it seemed faster to just use @JsonIgnore to hide the products in API responses
         It definitely would be much better to create a cartDTO and return that with an organized list of products
      */
     @JsonIgnore

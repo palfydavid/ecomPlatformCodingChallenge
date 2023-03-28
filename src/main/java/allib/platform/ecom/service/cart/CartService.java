@@ -61,10 +61,14 @@ public class CartService implements ICartService {
                 () -> new ResourceNotFoundException("Product not found with the given ID: " + productId + ".")
         );
         cart.removeProduct(product);
-        // Cart might be deleted when the user removed the last product
+        // Here I can imagine deleting the cart when the last product is removed from it
         return cartRepository.save(cart);
     }
 
+    /*
+        Curretnly we can add a customer to a cart, but not cart to customer. It could be implemented in the
+        customer service.
+     */
     @Override
     @CheckCartCheckoutState
     public Cart addCustomer(Long cartId, CustomerRequestDto customerRequest) {
@@ -103,4 +107,23 @@ public class CartService implements ICartService {
         cart.setReadyToCheckout(checkoutStateRequest.isReadyToCheckout());
         return cartRepository.save(cart);
     }
+
+    /*
+        MERGING TWO CARTS - how I would have solved it
+
+        I would have created a POST method, since we create a new resource at the end of the day,
+        and the URI would be /carts/{cartOneId}/merge/{cartTwoId}
+
+        Steps in brief
+            - check if both carts exist in the database
+            - create a new cart object and copy the products from cart1
+            - loop through the products of cart2
+                - if product[i] is not in cart1, then copy to the new cart
+                - if product[i] is also in cart1, then add the two quantities in the new cart
+            - I would not check if customer has been added to cart1 earlier,
+                just copy the current value (null or a customer id) to the new cart object
+            - save the new cart to the database
+            - the old carts could be either deleted or mark them as invalid or merged and probably store the new cart id
+            - return the new cart
+     */
 }
